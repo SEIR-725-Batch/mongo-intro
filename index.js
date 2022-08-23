@@ -1,23 +1,35 @@
 require('./connection/db.connection');
 const express = require('express');
 const app = express();
-require('dotenv').config();
 let articleModel = require('./models/Article')
-const PORT = process.env.PORT || 4000;
+const PORT = 4000;
+const articleController = require('./controllers/articles')
 
-app.get('/', (req, res) => {
-    let articles = articleModel.find({})
-    console.log(articles);
-    context = {
-        hello: articles
+app.use('view engine', 'ejs');
+app.use('', articleController)
+
+app.get('/', async (req, res) => {
+    try {
+        let articles = await articleModel.find({})
+        console.log(articles);
+        context = {
+            hello: articles
+        }
+        res.json(articles);
+    } catch (err) {
+        console.log(err);
     }
-    res.render('index.ejs', context)
 })
 
-app.post('/', (req, res) => {
-    let article = req.body;
-    articleModel.create(article);
-    res.redirect('/');
+app.post('/', async (req, res) => {
+    try {
+        let article = req.body;
+        await articleModel.create(article);
+        let allArticles = articleModel.find({});
+        res.json(allArticles);
+    } catch(err) {
+        console.log(err);
+    }
 })
 
 app.listen(PORT, function() {
