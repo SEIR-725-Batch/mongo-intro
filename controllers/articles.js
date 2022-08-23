@@ -6,7 +6,7 @@ router.use(express.json())
 
 const articles = require('../models/Article')
 
-router.get(':/id', async (req, res) => {
+router.get('/:id', async (req, res) => {
     try {
         let article = await articles.findById(req.params.id);
         res.json(article);
