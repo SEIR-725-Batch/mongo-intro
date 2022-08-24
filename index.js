@@ -1,7 +1,7 @@
-require('./connection/db.connection');
+// require('./connection/db.connection');
 const express = require('express');
 const app = express();
-let articleModel = require('./models/Article')
+// let articleModel = require('./models/Article')
 const PORT = 4000;
 const articleController = require('./controllers/articles')
 

@@ -31,8 +31,9 @@ router.get('/', async (req, res) => {
 router.post('/', async (req, res) => {
     try {
         let article = req.body;
-        await articles.create(article);
-        let allArticles = articles.find({});
+        let createdArticle = await articles.create(article);
+        console.log(createdArticle);
+        let allArticles = await articles.find({});
         res.json(allArticles);
     } catch(err) {
         console.log(err);

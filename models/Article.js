@@ -1,4 +1,6 @@
 const mongoose = require("mongoose"); //require mongoose package
+require('../connection/db.connection');
+
 // const Schema = mongoose.Schema; //mongoose has many properties on it.  One is a constructor function for Schemas
 
 // const commentSchema = new mongoose.Schema({
